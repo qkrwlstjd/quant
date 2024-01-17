@@ -93,7 +93,7 @@ DATABASES = {
         'PASSWORD': os.getenv('DATABASE_PASSWORD'),
         'HOST': os.getenv('DATABASE_HOST'),  # 또는 'localhost'
         'PORT': os.getenv('DATABASE_PORT'),  # 기본값은 3306입니다
-    }
+    },
 }
 
 
@@ -152,3 +152,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ],
 }
+
+CRON_CLASSES = [
+    'stock.cron.finalized_price_cron_job.PriceFinalizationCronJob',  # 작업 경로 및 클래스 이름을 정확하게 지정해야 합니다.
+]

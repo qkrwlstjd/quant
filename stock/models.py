@@ -7,6 +7,7 @@ class Ticker(models.Model):
     code = models.CharField(max_length=10)
     name = models.CharField(max_length=30)
     market = models.CharField(max_length=10)
+    listing = models.BooleanField(default=True)
 
 class Price(models.Model):
     ticker = models.ForeignKey(Ticker, on_delete=models.CASCADE)
