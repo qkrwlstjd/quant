@@ -1,11 +1,10 @@
-from django.db import models
-from stock.models import Ticker
 from stock.serializers import TickerSerializer
+from django.forms.models import model_to_dict
 
 
-# Query to get all objects of Ticker model
-def update_ticker_data(ticker,listing):
+def update_ticker_data(ticker, listing):
+    ticker = model_to_dict(ticker)
+    ticker['listing'] = listing
     ticker_serializer = TickerSerializer(data=ticker)
-    ticker_serializer.validated_data['listing'] = listing
-    if TickerSerializer.is_valid():
+    if ticker_serializer.is_valid():
         ticker_serializer.save()

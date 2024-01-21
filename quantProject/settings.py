@@ -155,4 +155,5 @@ REST_FRAMEWORK = {
 
 CRON_CLASSES = [
     'stock.cron.finalized_price_cron_job.PriceFinalizationCronJob',  # 작업 경로 및 클래스 이름을 정확하게 지정해야 합니다.
+    'stock.cron.unfinalized_price_cron_job.PriceUnfinalizationCronJob',  # 작업 경로 및 클래스 이름을 정확하게 지정해야 합니다.
 ]
