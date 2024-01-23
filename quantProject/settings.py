@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     #installed
     'django_cron',
     'rest_framework',
+    'drf_yasg',
     #apps
     'stock.apps.SchedulerConfig',
     'analytics.apps.AnalyticsConfig',
