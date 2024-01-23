@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django_cron',
     'rest_framework',
     'drf_yasg',
+    'drf_spectacular',
     #apps
     'stock.apps.SchedulerConfig',
     'analytics.apps.AnalyticsConfig',
@@ -152,6 +153,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 CRON_CLASSES = [
