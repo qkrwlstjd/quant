@@ -20,8 +20,9 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
-    path('api/', include('analytics.urls')),  # 'myapp'는 앱 이름입니다.
+    path('', SpectacularSwaggerView.as_view(url_name='zzzzzz'), name='swagger-ui'),
+    path('analytics/', include('analytics.urls')),  # 'myapp'는 앱 이름입니다.
+    path('stock/', include('stock.urls')),  # 'myapp'는 앱 이름입니다.
     path('admin/', admin.site.urls),
-    path('schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('zzzzzz/', SpectacularAPIView.as_view(), name='zzzzzz'),
 ]

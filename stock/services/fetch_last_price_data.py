@@ -4,7 +4,7 @@ from datetime import date, timedelta
 
 
 # Query to get all objects of Ticker model
-def fetch_last_date(ticker,is_finalized=True):
+def fetch_last_date(ticker,is_finalized):
     # is_finalized 값에 따라 필터를 적용하고 마지막으로 생성된 1개의 Price 객체를 가져옴
     last_price = Price.objects.filter(ticker=ticker,is_finalized=is_finalized).order_by('-date').first()
 

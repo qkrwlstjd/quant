@@ -17,7 +17,7 @@ class PriceFinalizationCronJob(CronJobBase):
     def do(self):
         tickers = fetch_ticker_data()
         for ticker in tickers:
-            last_ticker_data = fetch_last_date(ticker,is_finalized=True)
+            last_ticker_data = fetch_last_date(ticker, True)
             default_date = "2020-01-01"
             data = fetch_finalized_price_data(ticker.code, ticker.market,
                                               last_ticker_data if last_ticker_data else default_date)
@@ -25,8 +25,12 @@ class PriceFinalizationCronJob(CronJobBase):
                 if data == [] and last_ticker_data is None:
                     raise Exception("Not data and last ticker is not")
                 if last_ticker_data is not None and str(data[-1]['Date'].strftime('%Y-%m-%d')) == str(last_ticker_data):
+                    print(ticker.name, data[-1]['Date'].strftime('%Y-%m-%d'), last_ticker_data)
                     continue
-                save_price_data(data, ticker)
+                else:
+                    save_price_data(data, ticker, True)
             except Exception as e:
                 print(str(e))
                 update_ticker_data(ticker, False)
+
+        return True

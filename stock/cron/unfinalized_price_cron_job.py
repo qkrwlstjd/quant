@@ -17,7 +17,7 @@ class PriceUnfinalizationCronJob(CronJobBase):
     def do(self):
         tickers = fetch_ticker_data()
         for ticker in tickers:
-            last_ticker_data = fetch_last_date(ticker,is_finalized=False)
+            last_ticker_data = fetch_last_date(ticker,False)
 
             today = datetime.now()
             sixty_days_ago = today - timedelta(days=59)
@@ -31,7 +31,9 @@ class PriceUnfinalizationCronJob(CronJobBase):
                 if last_ticker_data is not None and str(data[-1]['Date'].strftime('%Y-%m-%d')) == str(last_ticker_data):
                     print(ticker.name,data[-1]['Date'].strftime('%Y-%m-%d'),last_ticker_data)
                     continue
-                save_price_data(data, ticker,False)
+                else:
+                    save_price_data(data, ticker,False)
             except Exception as e:
                 print(str(e))
                 update_ticker_data(ticker, False)
+        return True

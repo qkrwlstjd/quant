@@ -21,7 +21,7 @@ class PriceSerializer(serializers.ModelSerializer):
     def to_internal_value(self, data):
         # 원본 데이터의 필드 이름을 모델의 필드 이름에 맞게 변환
         internal_data = {
-            'ticker': self.context.get('ticker').id,
+            'ticker': self.context.get('ticker').code,
             'open': safe_cast_int(data.get('Open')),
             'high': safe_cast_int(data.get('High')),
             'low': safe_cast_int(data.get('Low')),

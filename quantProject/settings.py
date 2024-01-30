@@ -160,3 +160,26 @@ CRON_CLASSES = [
     'stock.cron.finalized_price_cron_job.PriceFinalizationCronJob',  # 작업 경로 및 클래스 이름을 정확하게 지정해야 합니다.
     'stock.cron.unfinalized_price_cron_job.PriceUnfinalizationCronJob',  # 작업 경로 및 클래스 이름을 정확하게 지정해야 합니다.
 ]
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'rest_framework': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+    },
+}
