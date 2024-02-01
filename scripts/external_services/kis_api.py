@@ -78,8 +78,31 @@ class KisApi:
         self.token = self.perform_request('POST', url, headers, data_json)['access_token']
         return self.token
 
+    def delete_token(self):
+        env_config = self.env_config
+        # 요청할 URL 설정
+        url = f"{env_config['URL']}/oauth2/revokeP"
+
+        # 요청에 사용할 데이터
+        data = {
+            "appkey": env_config['APP_KEY'],
+            "appsecret": env_config['APP_SECRET'],
+            'token': self.token
+        }
+
+        # Content-Type 지정
+        headers = {
+            'Content-Type': 'application/json; charset=UTF-8'
+        }
+
+        data_json = json.dumps(data)
+
+        # POST 요청 보내기
+        self.token = self.perform_request('POST', url, headers, data_json)
+        return self.token
+
     def get_stock_price(self, code):
-        code=code.zfill(6)
+        code = code.zfill(6)
         # 환경 설정 가져오기
         env_config = self.env_config
 
