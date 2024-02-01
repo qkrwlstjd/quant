@@ -11,13 +11,21 @@ class KisApi:
         self.env_config = self.get_env(env)
         self.token = None
         self.api_rate_limit_num = 10
-        self.api_rate_limit_time = 1
+        self.api_rate_limit_time = 2
         self.request_count = 0
         self.first_request_time = None
 
     def perform_request(self, method, url, header, data):
         self.check_request_limit()
-        return perform_request(method, url, header, data)
+        try:
+            response = perform_request(method, url, header, data)
+            if not response:
+                raise Exception('응답이 없습니다.')
+            return response
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(10)  # 에러 발생 시 10초 대기 후 재시도
+            return self.perform_request(method, url, header, data)
 
     def check_request_limit(self):
         if self.first_request_time is None:
@@ -71,6 +79,7 @@ class KisApi:
         return self.token
 
     def get_stock_price(self, code):
+        code=code.zfill(6)
         # 환경 설정 가져오기
         env_config = self.env_config
 

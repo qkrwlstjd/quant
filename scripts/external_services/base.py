@@ -12,7 +12,7 @@ def perform_request(method, url, headers=None, data=None):
 
         if response.status_code == 200:
             response_data = response.json()
-            print("Response Data:", response_data)
+            # print("Response Data:", response_data)
             return response_data
         else:
             print(f"Error: {response.status_code}")
