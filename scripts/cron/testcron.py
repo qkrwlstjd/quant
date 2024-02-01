@@ -1,5 +1,5 @@
-from stock.cron.finalized_price_cron_job import PriceFinalizationCronJob
-from stock.cron.unfinalized_price_cron_job import PriceUnfinalizationCronJob
+from scripts.cron.finalized_price_cron_job import PriceFinalizationCronJob
+from scripts.cron.unfinalized_price_cron_job import PriceUnfinalizationCronJob
 
 def test_cron_job_execution():
     # 크론 작업 클래스의 인스턴스 생성
