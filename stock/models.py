@@ -29,11 +29,19 @@ class Price(models.Model):
 
 class AtrResult(models.Model):
     ticker = models.ForeignKey(Ticker, on_delete=models.CASCADE)
-    price_buy = models.ForeignKey(Price, on_delete=models.CASCADE, related_name='atr_results_buy')
-    price_sell = models.ForeignKey(Price, on_delete=models.CASCADE, related_name='atr_results_sell')
-    buy_line = models.FloatField(default=0)
-    comment = models.CharField(max_length=20,default='')
-    profit = models.FloatField()
+    price = models.ForeignKey(Price, on_delete=models.CASCADE, related_name='atr_prices', null=True)
+    buy_price = models.ForeignKey(Price, on_delete=models.CASCADE, related_name='buy_prices', null=True)
+    sell_price = models.ForeignKey(Price, on_delete=models.CASCADE, related_name='sell_prices', null=True)
+    atr_line = models.FloatField(default=0)
+    ma5 = models.FloatField(default=0)
+    ma20 = models.FloatField(default=0)
+    ma60 = models.FloatField(default=0)
+    ma5_cross = models.BooleanField(default=False)
+    ma20_cross = models.BooleanField(default=False)
+    ma60_cross = models.BooleanField(default=False)
+    prev_price = models.ForeignKey(Price, on_delete=models.CASCADE, related_name='prev_prices', null=True)
+    next_price = models.ForeignKey(Price, on_delete=models.CASCADE, related_name='next_prices', null=True)
+
 
 
 class Indicators(models.Model):
